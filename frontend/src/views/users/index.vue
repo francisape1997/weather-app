@@ -10,7 +10,14 @@
         <h2 class="text-lg font-medium">{{ user.name }}</h2>
         <div class="flex justify-between">
           <p class="text-sm">{{ user.email }}</p>
-          <p class="text-sm font-medium">{{ user.weather.main.temp }}&deg;C</p>
+          <p
+              v-if="user?.weather?.main?.temp"
+              class="text-sm font-medium">
+            {{ user?.weather?.main?.temp }}&deg;C
+          </p>
+          <p v-else>
+            <small class="text-red-500">No Weather Data</small>
+          </p>
           <Modal
               :open="isModalOpen[user.id]"
               @close="isModalOpen[user.id] = false"

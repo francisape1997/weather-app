@@ -8,12 +8,60 @@
           <img class="w-16 h-16 mr-2" :src="iconUrl" :alt="description" />
           <div class="text-xl">{{ description }}</div>
         </div>
-        <div class="text-5xl font-bold mt-2">{{ Math.round(main.temp) }}°C</div>
-        <div class="text-lg mt-2">Feels like {{ Math.round(main.feels_like) }}°C</div>
-        <div class="text-lg mt-2">Humidity {{ main.humidity }}%</div>
-        <div class="text-lg mt-2">Pressure {{ main.pressure }}hPa</div>
-        <div class="text-lg mt-2">Wind Speed {{ wind.speed }}m/s</div>
-        <div class="text-lg mt-2">Wind Direction {{ wind.deg }}°</div>
+
+        <div
+            v-if="main.temp"
+            class="text-5xl font-bold mt-2">{{ Math.round(main.temp) }}°C
+        </div>
+
+        <div v-else>
+          No Data
+        </div>
+
+        <div
+            v-if="main.feels_like"
+            class="text-lg mt-2">Feels like {{ Math.round(main.feels_like) }}°C
+        </div>
+
+        <div v-else>
+          No Data
+        </div>
+
+        <div
+            v-if="main.humidity"
+            class="text-lg mt-2">Humidity {{ main.humidity }}%
+        </div>
+
+        <div v-else>
+          No Data
+        </div>
+
+        <div
+            v-if="main.pressure"
+            class="text-lg mt-2">Pressure {{ main.pressure }}hPa
+        </div>
+
+        <div v-else>
+          No Data
+        </div>
+
+        <div
+            v-if="wind.speed"
+            class="text-lg mt-2">Wind Speed {{ wind.speed }}m/s
+        </div>
+
+        <div v-else>
+          No Data
+        </div>
+
+        <div
+            v-if="wind.deg"
+            class="text-lg mt-2">Wind Direction {{ wind.deg }}°
+        </div>
+
+        <div v-else>
+          No Data
+        </div>
       </div>
     </div>
   </div>
