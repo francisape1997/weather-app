@@ -6,6 +6,7 @@ use App\Interfaces\IWeatherService;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\RequestException;
 
 class OpenWeatherMapService implements IWeatherService
 {
@@ -19,19 +20,24 @@ class OpenWeatherMapService implements IWeatherService
      */
     public function getCurrentWeather(string $lat, string $lon): array
     {
-        $url = self::API . '/weather';
+        try {
+            $url = self::API . '/weather';
 
-        $client = new Client;
+            $client = new Client;
 
-        $response = $client->get($url, [
-            'query' => [
-                'lat'   => $lat,
-                'lon'   => $lon,
-                'appid' => env('OPEN_WEATHER_API_KEY'),
-                'units' => 'metric',
-            ]
-        ]);
+            $response = $client->get($url, [
+                'query' => [
+                    'lat'   => $lat,
+                    'lon'   => $lon,
+                    'appid' => env('OPEN_WEATHER_API_KEY'),
+                    'units' => 'metric',
+                ]
+            ]);
 
-        return json_decode($response->getBody(), true);
+            return json_decode($response->getBody(), true);
+        } catch (RequestException $e) {
+            // Fallback implementation
+            return [];
+        }
     }
 }

@@ -19,7 +19,7 @@ interface ICacheService
      * @param mixed $value
      * @param int|null $ttl
      */
-    public function set(string $key, mixed $value, ?int $ttl);
+    public function set(string $key, mixed $value, ?int $ttl = 3600);
 
     /**
      * Remove the value from the cache.
